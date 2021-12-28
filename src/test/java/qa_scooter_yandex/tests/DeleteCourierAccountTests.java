@@ -6,7 +6,7 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
 import qa_scooter_yandex.model.CourierAccount;
-import qa_scooter_yandex.model.CourierAccountAPI;
+import qa_scooter_yandex.rests.CourierAccountAPI;
 import qa_scooter_yandex.model.CourierCredentials;
 
 import static org.apache.http.HttpStatus.*;

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import qa_scooter_yandex.model.Order;
-import qa_scooter_yandex.model.OrdersAPI;
+import qa_scooter_yandex.rests.OrdersAPI;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.notNullValue;

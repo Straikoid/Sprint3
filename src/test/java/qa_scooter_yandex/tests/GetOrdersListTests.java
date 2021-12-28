@@ -8,7 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import qa_scooter_yandex.model.*;
-import ru.praktikum_services.qa_scooter.model.*;
+import qa_scooter_yandex.rests.CourierAccountAPI;
+import qa_scooter_yandex.rests.OrdersAPI;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class GetOrdersListTests {
         createOrdersList();
         courierAccountAPI.registerNewCourierAccount(courierAccount).assertThat().statusCode(SC_CREATED);
         courierId = courierAccountAPI.loginCourierAccount(courierCredentials).assertThat().statusCode(SC_OK).extract().path("id").toString();
-        CreateAndAcceptCompleteOrdersForCourier(courierId);
+        createAndAcceptCompleteOrdersForCourier(courierId);
         ValidatableResponse response = ordersAPI.getOrdersListForCourier(courierId, null, null, null);
         response.assertThat().statusCode(SC_OK).and().body("orders.size()", is(10));
 
@@ -79,7 +80,7 @@ public class GetOrdersListTests {
 
         courierAccountAPI.registerNewCourierAccount(courierAccount).assertThat().statusCode(SC_CREATED);
         courierId = courierAccountAPI.loginCourierAccount(courierCredentials).assertThat().statusCode(SC_OK).extract().path("id").toString();
-        CreateAndAcceptCompleteOrdersForCourier(courierId);
+        createAndAcceptCompleteOrdersForCourier(courierId);
         ValidatableResponse response = ordersAPI.getOrdersListForCourier(courierId, "[\"5\", \"6\"]", null, null);
         response.assertThat().statusCode(SC_OK).and().body("orders.size()", is(8));
 
@@ -131,7 +132,7 @@ public class GetOrdersListTests {
         }
     }
 
-    private void CreateAndAcceptCompleteOrdersForCourier(String courierId) {
+    private void createAndAcceptCompleteOrdersForCourier(String courierId) {
         for (int i = 0; i < ordersList.size(); i++) {
             String orderTrackNumber = ordersAPI.createNewOrder(ordersList.get(i)).assertThat().statusCode(SC_CREATED).extract().path("track").toString();
             String orderId = ordersAPI.getOrderByTrackNumber(String.valueOf(orderTrackNumber)).assertThat().statusCode(SC_OK).extract().path("order.id").toString();

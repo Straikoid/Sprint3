@@ -6,7 +6,7 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
 import qa_scooter_yandex.model.Order;
-import qa_scooter_yandex.model.OrdersAPI;
+import qa_scooter_yandex.rests.OrdersAPI;
 
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;

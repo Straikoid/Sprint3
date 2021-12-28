@@ -1,14 +1,15 @@
-package qa_scooter_yandex.model;
+package qa_scooter_yandex.rests;
 
 import io.qameta.allure.Step;
 
 import io.restassured.response.ValidatableResponse;
+import qa_scooter_yandex.model.Order;
 
 import static io.restassured.RestAssured.given;
 
 public class OrdersAPI extends RestAssuredClient {
 
-    private static final String ORDER_PATH = "api/v1/orders";
+    private static final String ORDER_PATH = "/orders";
 
     @Step("Create new order")
     public ValidatableResponse createNewOrder(Order order) {
@@ -59,7 +60,7 @@ public class OrdersAPI extends RestAssuredClient {
         return given()
                 .spec(getBaseSpec())
                 .and()
-                .put("https://qa-scooter.praktikum-services.ru/api/v1/orders/finish/{orderId}", orderId).then();
+                .put(ORDER_PATH + "/finish/{orderId}", orderId).then();
 
     }
 
@@ -69,9 +70,7 @@ public class OrdersAPI extends RestAssuredClient {
                 spec(getBaseSpec())
                 .and()
                 .when()
-                .put(ORDER_PATH + "/cancel/?track={track}", orderTrackNumber).then();
-
+                .queryParam("track", orderTrackNumber)
+                .put(ORDER_PATH + "/cancel").then();
     }
-
-
 }

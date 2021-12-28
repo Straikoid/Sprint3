@@ -1,4 +1,4 @@
-package qa_scooter_yandex.model;
+package qa_scooter_yandex.rests;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -8,6 +8,6 @@ public class RestAssuredClient {
     public RequestSpecification getBaseSpec()
     {
         return new RequestSpecBuilder().setContentType(ContentType.JSON)
-                .setBaseUri("https://qa-scooter.praktikum-services.ru/").build();
+                .setBaseUri("https://qa-scooter.praktikum-services.ru/api/v1").build();
     }
 }

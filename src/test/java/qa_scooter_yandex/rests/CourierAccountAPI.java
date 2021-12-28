@@ -1,13 +1,15 @@
-package qa_scooter_yandex.model;
+package qa_scooter_yandex.rests;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import qa_scooter_yandex.model.CourierAccount;
+import qa_scooter_yandex.model.CourierCredentials;
 
 import static io.restassured.RestAssured.given;
 
 public class CourierAccountAPI extends RestAssuredClient {
 
-    private static final String COURIER_PATH = "api/v1/courier";
+    private static final String COURIER_PATH = "/courier";
 
     @Step("Register new account")
     public ValidatableResponse registerNewCourierAccount(CourierAccount courierAccount) {

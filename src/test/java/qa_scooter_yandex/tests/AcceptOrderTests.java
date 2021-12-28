@@ -8,7 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import qa_scooter_yandex.model.*;
-import ru.praktikum_services.qa_scooter.model.*;
+import qa_scooter_yandex.rests.CourierAccountAPI;
+import qa_scooter_yandex.rests.OrdersAPI;
 
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;

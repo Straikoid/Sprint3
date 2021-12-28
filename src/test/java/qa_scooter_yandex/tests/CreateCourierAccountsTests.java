@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import qa_scooter_yandex.model.CourierAccount;
 
-import qa_scooter_yandex.model.CourierAccountAPI;
+import qa_scooter_yandex.rests.CourierAccountAPI;
 import qa_scooter_yandex.model.CourierCredentials;
 
 import static org.apache.http.HttpStatus.*;
@@ -80,7 +80,7 @@ public class CreateCourierAccountsTests {
         CourierAccount secondAccount = CourierAccount.getRandom();
         secondAccount.setLogin(courierAccount.getLogin());
         ValidatableResponse secondAccountResponse = courierAccountAPI.registerNewCourierAccount(secondAccount);
-        secondAccountResponse.assertThat().statusCode(SC_CONFLICT).and().body("message", equalTo("Этот логин уже используется"));
+        secondAccountResponse.assertThat().statusCode(SC_CONFLICT).and().body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
         courierId = courierAccountAPI.loginCourierAccount(credentials).assertThat().statusCode(SC_OK).extract().path("id");
 
 
