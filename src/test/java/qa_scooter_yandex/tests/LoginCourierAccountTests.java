@@ -40,10 +40,12 @@ public class LoginCourierAccountTests {
     }
 
     @Test
-    @DisplayName("Login without password")
-    public void loginCourierAccountWithoutPasswordBadRequest() {
+    @DisplayName("Login with password by null value")
+    public void loginCourierAccountWithPasswordByNullValue() {
 
-        CourierCredentials credentials = new CourierCredentials(courierAccount.getLogin(), "");
+   // При выполнении этого теста сервер отдает 504 ошибку вместо корректного ответа с message.
+
+        CourierCredentials credentials = new CourierCredentials(courierAccount.getLogin(), null);
         ValidatableResponse response = courierAccountAPI.loginCourierAccount(credentials);
         response.assertThat().statusCode(SC_BAD_REQUEST).and().body("message", equalTo("Недостаточно данных для входа"));
     }
@@ -59,8 +61,8 @@ public class LoginCourierAccountTests {
     }
 
     @Test
-    @DisplayName("Login without username")
-    public void loginCourierAccountWithoutUserNameBadRequest() {
+    @DisplayName("Login with user name by null value")
+    public void loginCourierAccountWithUserNameByNullValue() {
 
         CourierCredentials credentials = new CourierCredentials(null, courierAccount.getPassword());
         ValidatableResponse response = courierAccountAPI.loginCourierAccount(credentials);

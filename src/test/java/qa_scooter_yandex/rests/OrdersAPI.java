@@ -32,7 +32,7 @@ public class OrdersAPI extends RestAssuredClient {
     }
 
     @Step("Get orders list")
-    public ValidatableResponse getOrdersListForCourier(String courierId, String stationsId, String limit, String page) {
+    public ValidatableResponse getOrdersList(String courierId, String stationsId, String limit, String page) {
 
         return given()
                 .spec(getBaseSpec())
@@ -41,6 +41,16 @@ public class OrdersAPI extends RestAssuredClient {
                 .queryParam("nearestStation", stationsId)
                 .queryParam("limit", limit)
                 .queryParam("page", page)
+                .get(ORDER_PATH).then();
+
+    }
+    @Step("Get orders list")
+    public ValidatableResponse getOrdersList() {
+
+        return given()
+                .spec(getBaseSpec())
+                .and()
+                .when()
                 .get(ORDER_PATH).then();
 
     }
